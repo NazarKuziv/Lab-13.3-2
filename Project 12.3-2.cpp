@@ -18,7 +18,7 @@ struct Elem
     int info;
 };
 
-void Create(Elem*& first, Elem*& last)
+void Create(Elem*& first, Elem*& last,int S,int F)
 {
     Elem* tmp = new Elem; // ініціалізуємо вказівник tmp – налаштуємо його на новостворений елемент.
     tmp->info = 0 + rand() % 5; //  В новостворенbq елемент запишемо випадкові числа від 0 дло 3
@@ -31,6 +31,12 @@ void Create(Elem*& first, Elem*& last)
 
     if (first == NULL) // якщо вказівник first мав значення NULL, налаштуємо його на новостворений елемент
         first = tmp;
+
+    if (S < F)
+        Create(first, last, S + 1, F);
+    else
+        return;
+    
 }
 
 void Print(Elem* first)
@@ -88,8 +94,9 @@ int main()
     Elem* first = NULL,
         * last = NULL;
 
-    for (int i = 1; i <= 10; i++)
-        Create(first, last);
+    
+    Create(first, last,1,10);
+
     cout << "Список:" << endl;
     cout << endl;
     Print(first);
